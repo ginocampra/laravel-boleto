@@ -1392,6 +1392,73 @@ abstract class AbstractBoleto implements BoletoContract
     }
 
     /**
+     * Retorna Valor de multa
+     *
+     * @param float $default
+     * @return float
+     */
+    public function getValorMulta($default = 0)
+    {
+        if ($this->getMulta() <= 0 || $this->getValor() <= 0) {
+            return (float) $default;
+        }
+
+        return (float) Util::percent($this->getValor(), $this->getMulta());
+    }
+
+    /**
+     * Retorna Dias Atraso
+     *
+     * @param float $default
+     * @return float
+     */
+    public function getDiasAtraso($default = 0)
+    {
+        $hoje = new Carbon();
+        $dataVencimento = $this->getDataVencimento();
+
+        if ($hoje->lte($dataVencimento)) {
+            return (int) $default;
+        }
+
+        $diasAtraso = $hoje->diffInDays($dataVencimento);
+
+        return (int) $diasAtraso;
+    }
+
+    /**
+     * Retorna Valor de Mora
+     *
+     * @param float $default
+     * @return float
+     */
+    public function getValorMora($default = 0)
+    {
+        $diasAtraso = $this->getDiasAtraso();
+
+        if ($this->getMoraDia() <= 0 || $this->getValor() <= 0 || $diasAtraso <= 0) {
+            return (float) $default;
+        }
+
+        return (float) ($this->getMoraDia() * $diasAtraso);
+    }
+
+    /**
+     * Retorna Valor Cobrado
+     *
+     * @param float $default
+     * @return float
+     */
+    public function getValorCobrado($default = 0)
+    {
+        if ($this->getValor() <= 0) {
+            return (float) $default;
+        }
+
+        return (float) ($this->getValor() + $this->getValorMulta());
+    }    
+
+    /**
      * Seta a % de juros
      *
      * @param float $juros

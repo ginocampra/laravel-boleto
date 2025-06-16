@@ -159,6 +159,26 @@ interface Boleto
     /**
      * @return mixed
      */
+    public function getValorMulta($default = 0);
+
+    /**
+     * @return mixed
+     */
+    public function getValorCobrado($default = 0);
+
+    /**
+     * @return mixed
+     */
+    public function getValorMora($default = 0);
+
+    /**
+     * @return mixed
+     */
+    public function getDiasAtraso($default = 0);    
+
+    /**
+     * @return mixed
+     */
     public function getJuros();
 
     /**

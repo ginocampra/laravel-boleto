@@ -339,7 +339,7 @@ class Pdf extends AbstractPdf implements PdfContract
         $xInstrucoes = $this->GetX();
         $yInstrucoes = $this->GetY();
 
-        $this->Cell(120, $this->desc, $this->_(''), 'LR');
+                $this->Cell(120, $this->desc, $this->_(''), 'LR');
         $this->Cell(50, $this->desc, $this->_('(-) Outras deduções'), 'TR', 1);
 
         $this->Cell(120, $this->cell, $this->_(''), 'LR');
@@ -348,8 +348,10 @@ class Pdf extends AbstractPdf implements PdfContract
         $this->Cell(120, $this->desc, $this->_(''), 'LR');
         $this->Cell(50, $this->desc, $this->_('(+) Mora / Multa' . ($this->boleto[$i]->getCodigoBanco() == '104' ? ' / Juros' : '')), 'TR', 1);
 
+        $this->SetFont($this->PadraoFont, 'B', $this->fcel);
         $this->Cell(120, $this->cell, $this->_(''), 'LR');
-        $this->Cell(50, $this->cell, $this->_(''), 'R', 1);
+        $this->Cell(50, $this->cell, $this->_($this->boleto[$i]->getDiasAtraso() > 0 ? Util::nReal($this->boleto[$i]->getValorMulta()+$this->boleto[$i]->getValorMora()) : ''), 'BR', 1, 'R');
+        $this->SetFont($this->PadraoFont, '', $this->fdes);
 
         $this->Cell(120, $this->desc, $this->_(''), 'LR');
         $this->Cell(50, $this->desc, $this->_('(+) Outros acréscimos'), 'TR', 1);
@@ -360,8 +362,11 @@ class Pdf extends AbstractPdf implements PdfContract
         $this->Cell(120, $this->desc, $this->_(''), 'LR');
         $this->Cell(50, $this->desc, $this->_('(=) Valor cobrado'), 'TR', 1);
 
+        $this->SetFont($this->PadraoFont, 'B', $this->fcel);
         $this->Cell(120, $this->cell, $this->_(''), 'BLR');
-        $this->Cell(50, $this->cell, $this->_(''), 'BR', 1);
+        $valorCobrado = $this->boleto[$i]->getDiasAtraso() > 0 ? Util::nReal($this->boleto[$i]->getValorCobrado()) : '';
+        $this->Cell(50, $this->cell, $this->_($valorCobrado), 'BR', 1, 'R');
+        $this->SetFont($this->PadraoFont, '', $this->fdes);
 
         $yEndPix = $this->GetY();
 
