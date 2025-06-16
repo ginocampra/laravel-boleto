@@ -1,11 +1,11 @@
 {
-    "name": "ginocampra/laravel-boleto",
+    "name": "eduardokum/laravel-boleto",
     "description": "Biblioteca com boletos para o laravel",
     "keywords": [
-        "ginocampra",
+        "eduardokum",
         "laravel-boleto"
     ],
-    "homepage": "https://github.com/ginocampra/laravel-boleto",
+    "homepage": "https://github.com/eduardokum/laravel-boleto",
     "license": "MIT",
     "authors": [
         {
@@ -33,12 +33,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ginocampra\\LaravelBoleto\\": "src"
+            "Eduardokum\\LaravelBoleto\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ginocampra\\LaravelBoleto\\Tests\\": "tests"
+            "Eduardokum\\LaravelBoleto\\Tests\\": "tests"
         }
     },
     "config": {
