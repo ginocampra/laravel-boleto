@@ -372,6 +372,11 @@ interface Boleto
     public function getMostrarEnderecoFichaCompensacao();
 
     /**
+     * @return mixed
+     */
+    public function getMostrarRecalculado();
+
+    /**
      * @return bool
      */
     public function imprimeBoleto();

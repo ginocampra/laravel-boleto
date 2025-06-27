@@ -2183,6 +2183,14 @@ abstract class AbstractBoleto implements BoletoContract
     }
 
     /**
+     * @return bool
+     */
+    public function mostrarRecalculado($default = false)
+    {
+        return $this->getMostrarRecalculado();
+    }
+
+    /**
      * @param $id
      * @return string
      */
