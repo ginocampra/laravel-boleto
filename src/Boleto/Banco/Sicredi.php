@@ -105,6 +105,13 @@ class Sicredi extends AbstractBoleto implements BoletoContract
     protected $codigoCliente;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Define se possui ou não registro
      *
      * @param bool $registro
@@ -292,5 +299,28 @@ class Sicredi extends AbstractBoleto implements BoletoContract
             'agencia'         => substr($campoLivre, 11, 4),
             //'contaCorrente' => substr($campoLivre, 17, 5),
         ];
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Sicredi
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

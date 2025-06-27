@@ -54,6 +54,13 @@ class Bnb extends AbstractBoleto implements BoletoContract
     ];
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Seta dia para baixa automática
      *
      * @param int $baixaAutomatica
@@ -136,5 +143,28 @@ class Bnb extends AbstractBoleto implements BoletoContract
             'nossoNumeroFull' => substr($campoLivre, 12, 8),
             'carteira'        => substr($campoLivre, 20, 2),
         ];
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Bnb
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

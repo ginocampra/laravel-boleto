@@ -73,6 +73,13 @@ class Abc extends AbstractBoleto implements BoletoContract
     protected $range = 0;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * @return int
      */
     public function getRange()
@@ -212,5 +219,28 @@ class Abc extends AbstractBoleto implements BoletoContract
             'nossoNumeroDv'   => substr($campoLivre, 24, 1),
             'nossoNumeroFull' => substr($campoLivre, 14, 11),
         ];
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Abc
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

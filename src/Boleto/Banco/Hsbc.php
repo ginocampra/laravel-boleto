@@ -51,6 +51,13 @@ class Hsbc extends AbstractBoleto implements BoletoContract
     protected $range;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Espécie do documento, geralmente DM (Duplicata Mercantil)
      *
      * @var string
@@ -173,5 +180,28 @@ class Hsbc extends AbstractBoleto implements BoletoContract
             'contaCorrente'   => substr($campoLivre, 15, 6),
             'contaCorrenteDv' => substr($campoLivre, 21, 1),
         ];
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Hsbc
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

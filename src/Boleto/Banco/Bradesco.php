@@ -90,6 +90,13 @@ class Bradesco extends AbstractBoleto implements BoletoContract
     protected $mostrarEnderecoFichaCompensacao = true;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Gera o Nosso Número.
      *
      * @return string
@@ -186,6 +193,19 @@ class Bradesco extends AbstractBoleto implements BoletoContract
     }
 
     /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Bradesco
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
      * Retorna o campo CIP do boleto
      *
      * @return string
@@ -193,5 +213,15 @@ class Bradesco extends AbstractBoleto implements BoletoContract
     public function getCip()
     {
         return Util::numberFormatGeral($this->cip, 3);
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

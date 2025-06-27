@@ -88,6 +88,13 @@ class Bb extends AbstractBoleto implements BoletoContract
     protected $variacao_carteira;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Retorna o campo Agência/Beneficiário do boleto
      *
      * @return string
@@ -255,5 +262,28 @@ class Bb extends AbstractBoleto implements BoletoContract
             'nossoNumeroDv'   => null,
             'nossoNumeroFull' => $nossoNumero,
         ];
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Bb
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

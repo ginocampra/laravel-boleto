@@ -78,6 +78,13 @@ class Bancoob extends AbstractBoleto implements BoletoContract
     protected $convenio;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Define o número do convênio. Sempre use string pois a quantidade de caracteres é validada.
      *
      * @param string $convenio
@@ -178,5 +185,28 @@ class Bancoob extends AbstractBoleto implements BoletoContract
     public function getAgenciaCodigoBeneficiario()
     {
         return sprintf('%s / %s', $this->getAgencia(), $this->getConvenio());
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Bancoob
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

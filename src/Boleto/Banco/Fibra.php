@@ -70,6 +70,13 @@ class Fibra extends AbstractBoleto implements BoletoContract
     protected $codigoCliente;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * @return int
      */
     public function getRange()
@@ -207,5 +214,28 @@ class Fibra extends AbstractBoleto implements BoletoContract
     public function imprimeBoleto()
     {
         return Util::upper($this->carteira) == 'D';
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Fibra
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

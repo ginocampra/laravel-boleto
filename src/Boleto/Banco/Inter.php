@@ -51,6 +51,13 @@ class Inter extends AbstractBoleto implements BoletoAPIContract
     protected $operacao;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * @var string[]
      */
     protected $protectedFields = [
@@ -403,5 +410,28 @@ class Inter extends AbstractBoleto implements BoletoAPIContract
     public function baixarBoleto()
     {
         throw new ValidationException('Banco Inter só possui comando de registro.');
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Inter
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

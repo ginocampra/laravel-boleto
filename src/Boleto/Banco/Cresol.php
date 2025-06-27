@@ -70,6 +70,13 @@ class Cresol extends AbstractBoleto implements BoletoContract
     protected $mostrarEnderecoFichaCompensacao = true;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Gera o Nosso Número.
      *
      * @return string
@@ -172,5 +179,28 @@ class Cresol extends AbstractBoleto implements BoletoContract
     public function getCip()
     {
         return Util::numberFormatGeral($this->cip, 3);
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Cresol
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

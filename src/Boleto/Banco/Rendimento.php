@@ -71,6 +71,13 @@ class Rendimento extends AbstractBoleto implements BoletoContract
     protected $codigoCliente;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * @return int
      */
     public function getRange()
@@ -209,5 +216,28 @@ class Rendimento extends AbstractBoleto implements BoletoContract
     public function imprimeBoleto()
     {
         return $this->carteira == 6;
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Rendimento
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

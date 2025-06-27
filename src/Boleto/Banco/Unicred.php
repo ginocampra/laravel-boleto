@@ -80,6 +80,13 @@ class Unicred extends AbstractBoleto implements BoletoContract
     protected $variacao_carteira = null;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Tipo de Juros
      */
     const TIPO_JURO_VALOR_DIARIO = '1';
@@ -442,5 +449,28 @@ class Unicred extends AbstractBoleto implements BoletoContract
         $nnClean = substr(Util::onlyNumbers($nossoNumero), -11);
 
         $this->campoNossoNumero = $nnClean;
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Unicred
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

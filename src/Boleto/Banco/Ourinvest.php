@@ -46,6 +46,13 @@ class Ourinvest extends AbstractBoleto implements BoletoContract
     protected $localPagamento = 'Canais eletrônicos, agências ou correspondentes bancários de todo o BRASIL';
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * @return bool
      */
     public function isEmissaoPropria()
@@ -141,5 +148,28 @@ class Ourinvest extends AbstractBoleto implements BoletoContract
     public function imprimeBoleto()
     {
         return $this->isEmissaoPropria();
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Ourinvest
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

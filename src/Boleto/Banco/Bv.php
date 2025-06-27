@@ -53,6 +53,13 @@ class Bv extends AbstractBoleto implements BoletoContract
      */
     protected $convenio;
 
+    /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
     public function __construct(array $params = [])
     {
         parent::__construct($params);
@@ -151,5 +158,28 @@ class Bv extends AbstractBoleto implements BoletoContract
     public function getAgenciaCodigoBeneficiario()
     {
         return sprintf('%04s/%012s', $this->getAgencia() ?: 1, $this->getCodigoCliente());
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Bv
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

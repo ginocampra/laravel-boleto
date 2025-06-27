@@ -62,6 +62,13 @@ class Daycoval extends AbstractBoleto implements BoletoContract
      */
     protected $range = 0;
 
+    /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
     public function __construct(array $params = [])
     {
         parent::__construct($params);
@@ -198,5 +205,28 @@ class Daycoval extends AbstractBoleto implements BoletoContract
             'nossoNumeroDv'   => substr($campoLivre, 24, 1),
             'nossoNumeroFull' => substr($campoLivre, 14, 11),
         ];
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Daycoval
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

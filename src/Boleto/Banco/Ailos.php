@@ -57,6 +57,13 @@ class Ailos extends AbstractBoleto implements BoletoContract
     protected $convenio;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Define se possui ou não registro
      *
      * @param  bool $registro
@@ -176,5 +183,28 @@ class Ailos extends AbstractBoleto implements BoletoContract
             'agencia' => null,
             'contaCorrente' => substr($campoLivre, 26, 8),
         ];
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Ailos
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

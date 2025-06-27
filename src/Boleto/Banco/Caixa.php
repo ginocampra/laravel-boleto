@@ -44,11 +44,18 @@ class Caixa extends AbstractBoleto implements BoletoContract
     ];
 
     /**
-     * Codigo do cliente junto ao banco.
+     * Código do cliente junto ao banco.
      *
      * @var string
      */
     protected $codigoCliente;
+
+    /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
 
     /**
      * Seta o código do cliente.
@@ -199,5 +206,28 @@ class Caixa extends AbstractBoleto implements BoletoContract
             'nossoNumeroDv'   => substr($campoLivre, 23, 1),
             'nossoNumeroFull' => substr($campoLivre, 7, 3) . substr($campoLivre, 11, 3) . substr($campoLivre, 15, 8),
         ];
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Caixa
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

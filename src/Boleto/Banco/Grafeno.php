@@ -53,6 +53,13 @@ class Grafeno extends AbstractBoleto implements BoletoContract
     protected $range = 0;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * @return int
      */
     public function getRange()
@@ -164,5 +171,28 @@ class Grafeno extends AbstractBoleto implements BoletoContract
             'nossoNumeroFull' => substr($campoLivre, 6, 11),
             'contaCorrente'   => substr($campoLivre, 17, 7),
         ];
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Grafeno
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

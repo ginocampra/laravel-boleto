@@ -69,6 +69,13 @@ class C6 extends AbstractBoleto implements BoletoContract
     protected $codigoCliente;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Gera o Nosso Número.
      *
      * @return string
@@ -160,5 +167,28 @@ class C6 extends AbstractBoleto implements BoletoContract
     public function getAgenciaCodigoBeneficiario()
     {
         return sprintf('%04s/%012s', $this->getAgencia() ?: 1, $this->getCodigoCliente());
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return C6
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }

@@ -73,6 +73,13 @@ class Banrisul extends AbstractBoleto implements BoletoContract
     protected $codigoCliente;
 
     /**
+     * Mostrar informações de recálculo no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarRecalculado = false;
+
+    /**
      * Seta dia para baixa automática
      *
      * @param int $baixaAutomatica
@@ -188,5 +195,28 @@ class Banrisul extends AbstractBoleto implements BoletoContract
     public function getAgenciaCodigoBeneficiario()
     {
         return $this->getCodigoCliente();
+    }
+
+    /**
+     * Define se deve mostrar informações de recálculo no boleto
+     *
+     * @param bool $mostrarRecalculado
+     * @return Banrisul
+     */
+    public function setMostrarRecalculado($mostrarRecalculado = true)
+    {
+        $this->mostrarRecalculado = (bool) $mostrarRecalculado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de recálculo no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarRecalculado()
+    {
+        return $this->mostrarRecalculado;
     }
 }
