@@ -1881,7 +1881,7 @@ abstract class AbstractBoleto implements BoletoContract
             . $this->getMoeda()
             . (
                 ($this->mostrarAtualizado(true) && $this->getDiasAtraso() > 0)
-                    ? Util::fatorVencimento($this->date('Y-m-d'))
+                    ? Util::fatorVencimento(date('Y-m-d'))
                     : Util::fatorVencimento($this->getDataVencimento())
             )
             . (
