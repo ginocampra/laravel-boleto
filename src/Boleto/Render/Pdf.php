@@ -193,8 +193,9 @@ class Pdf extends AbstractPdf implements PdfContract
         $this->SetFont($this->PadraoFont, 'B', $this->fcel);
         $this->Cell(50, $this->cell, $this->_($this->boleto[$i]->getNumeroDocumento()), 'LR');
         $this->Cell(40, $this->cell, $this->_($this->boleto[$i]->getBeneficiario()->getDocumento(), '##.###.###/####-##'), 'R');
-        $this->Cell(30, $this->cell, $this->_($this->boleto[$i]->getDataVencimento()->format('d/m/Y')), 'R');
-        $mostrarAtualizado = $this->boleto[$i]->getMostrarAtualizado() ?? false;
+        $mostrarAtualizado = $this->boleto[$i]->getMostrarAtualizado() ?? false;        
+        $dataVencimento = ($mostrarAtualizado) ? date('d/m/Y') : $this->boleto[$i]->getDataVencimento()->format('d/m/Y');
+        $this->Cell(30, $this->cell, $this->_($dataVencimento), 'R');
         $valorDocumento = ($mostrarAtualizado && $this->boleto[$i]->getDiasAtraso() > 0) ? Util::nReal($this->boleto[$i]->getValorCobrado()) : Util::nReal($this->boleto[$i]->getValor());
         $this->Cell(50, $this->cell, $this->_($valorDocumento), 'R', 1, 'R');
 
@@ -255,7 +256,9 @@ class Pdf extends AbstractPdf implements PdfContract
 
         $this->SetFont($this->PadraoFont, 'B', $this->fcel);
         $this->Cell(120, $this->cell, $this->_($this->boleto[$i]->getLocalPagamento()), 'LR');
-        $this->Cell(50, $this->cell, $this->_($this->boleto[$i]->getDataVencimento()->format('d/m/Y')), 'R', 1, 'R');
+        $mostrarAtualizado = $this->boleto[$i]->getMostrarAtualizado() ?? false;
+        $dataVencimento = ($mostrarAtualizado) ? date('d/m/Y') : $this->boleto[$i]->getDataVencimento()->format('d/m/Y');
+        $this->Cell(50, $this->cell, $this->_($dataVencimento), 'R', 1, 'R');
 
         $this->SetFont($this->PadraoFont, '', $this->fdes);
         $this->Cell(120, $this->desc, $this->_('Beneficiário'), 'TLR');
