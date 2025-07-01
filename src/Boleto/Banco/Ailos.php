@@ -64,6 +64,13 @@ class Ailos extends AbstractBoleto implements BoletoContract
     protected $mostrarRecalculado = false;
 
     /**
+     * Mostrar informações de boleto atualizado
+     *
+     * @var bool
+     */
+    protected $mostrarAtualizado = false;
+
+    /**
      * Define se possui ou não registro
      *
      * @param  bool $registro
@@ -206,5 +213,27 @@ class Ailos extends AbstractBoleto implements BoletoContract
     public function getMostrarRecalculado()
     {
         return $this->mostrarRecalculado;
+    }
+
+    /**
+     * Define se deve mostrar informações de boleto atualizado
+     *
+     * @param bool $mostrarAtualizado
+     * @return Ailos
+     */
+    public function setMostrarAtualizado($mostrarAtualizado = true)
+    {
+        $this->mostrarAtualizado = (bool) $mostrarAtualizado;
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de boleto atualizado
+     *
+     * @return bool
+     */
+    public function getMostrarAtualizado()
+    {
+        return $this->mostrarAtualizado;
     }
 }

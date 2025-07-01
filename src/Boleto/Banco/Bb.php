@@ -95,6 +95,13 @@ class Bb extends AbstractBoleto implements BoletoContract
     protected $mostrarRecalculado = false;
 
     /**
+     * Mostrar informações de boleto atualizado
+     *
+     * @var bool
+     */
+    protected $mostrarAtualizado = false;
+
+    /**
      * Retorna o campo Agência/Beneficiário do boleto
      *
      * @return string
@@ -285,5 +292,27 @@ class Bb extends AbstractBoleto implements BoletoContract
     public function getMostrarRecalculado()
     {
         return $this->mostrarRecalculado;
+    }
+
+    /**
+     * Define se deve mostrar informações de boleto atualizado
+     *
+     * @param bool $mostrarAtualizado
+     * @return Bb
+     */
+    public function setMostrarAtualizado($mostrarAtualizado = true)
+    {
+        $this->mostrarAtualizado = (bool) $mostrarAtualizado;
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de boleto atualizado
+     *
+     * @return bool
+     */
+    public function getMostrarAtualizado()
+    {
+        return $this->mostrarAtualizado;
     }
 }

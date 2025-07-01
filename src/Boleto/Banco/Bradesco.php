@@ -97,6 +97,13 @@ class Bradesco extends AbstractBoleto implements BoletoContract
     protected $mostrarRecalculado = false;
 
     /**
+     * Mostrar informações de boleto atualizado
+     *
+     * @var bool
+     */
+    protected $mostrarAtualizado = false;
+
+    /**
      * Gera o Nosso Número.
      *
      * @return string
@@ -206,6 +213,18 @@ class Bradesco extends AbstractBoleto implements BoletoContract
     }
 
     /**
+     * Define se deve mostrar informações de boleto atualizado
+     *
+     * @param bool $mostrarAtualizado
+     * @return Bradesco
+     */
+    public function setMostrarAtualizado($mostrarAtualizado = true)
+    {
+        $this->mostrarAtualizado = (bool) $mostrarAtualizado;
+        return $this;
+    }
+
+    /**
      * Retorna o campo CIP do boleto
      *
      * @return string
@@ -223,5 +242,15 @@ class Bradesco extends AbstractBoleto implements BoletoContract
     public function getMostrarRecalculado()
     {
         return $this->mostrarRecalculado;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de boleto atualizado
+     *
+     * @return bool
+     */
+    public function getMostrarAtualizado()
+    {
+        return $this->mostrarAtualizado;
     }
 }
