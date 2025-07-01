@@ -325,6 +325,7 @@ class Pdf extends AbstractPdf implements PdfContract
         $this->Cell(12, $this->cell, $this->_('R$'), 'R');
         $this->Cell(28, $this->cell, $this->_(''), 'R');
         $this->Cell(25, $this->cell, $this->_(($this->boleto[$i]->getCodigoBanco() == '001') ? Util::nReal($this->boleto[$i]->getValor()) : ''), 'R');
+        $mostrarAtualizado = $this->boleto[$i]->getMostrarAtualizado() ?? false;
         $valorDocumento = ($mostrarAtualizado && $this->boleto[$i]->getDiasAtraso() > 0) ? Util::nReal($this->boleto[$i]->getValorCobrado()) : Util::nReal($this->boleto[$i]->getValor());
         $this->Cell(50, $this->cell, $this->_($valorDocumento), 'R', 1, 'R');
 
