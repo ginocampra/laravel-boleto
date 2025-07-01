@@ -194,7 +194,9 @@ class Pdf extends AbstractPdf implements PdfContract
         $this->Cell(50, $this->cell, $this->_($this->boleto[$i]->getNumeroDocumento()), 'LR');
         $this->Cell(40, $this->cell, $this->_($this->boleto[$i]->getBeneficiario()->getDocumento(), '##.###.###/####-##'), 'R');
         $this->Cell(30, $this->cell, $this->_($this->boleto[$i]->getDataVencimento()->format('d/m/Y')), 'R');
-        $this->Cell(50, $this->cell, $this->_(Util::nReal($this->boleto[$i]->getValor())), 'R', 1, 'R');
+        $mostrarAtualizado = $this->boleto[$i]->getMostrarAtualizado() ?? false;
+        $valorDocumento = ($mostrarAtualizado && $this->boleto[$i]->getDiasAtraso() > 0) ? Util::nReal($this->boleto[$i]->getValorCobrado()) : Util::nReal($this->boleto[$i]->getValor());
+        $this->Cell(50, $this->cell, $this->_($valorDocumento), 'R', 1, 'R');
 
         $this->SetFont($this->PadraoFont, '', $this->fdes);
         $this->Cell(30, $this->desc, $this->_('(-) Descontos/Abatimentos'), 'TLR');
@@ -323,7 +325,8 @@ class Pdf extends AbstractPdf implements PdfContract
         $this->Cell(12, $this->cell, $this->_('R$'), 'R');
         $this->Cell(28, $this->cell, $this->_(''), 'R');
         $this->Cell(25, $this->cell, $this->_(($this->boleto[$i]->getCodigoBanco() == '001') ? Util::nReal($this->boleto[$i]->getValor()) : ''), 'R');
-        $this->Cell(50, $this->cell, $this->_(Util::nReal($this->boleto[$i]->getValor())), 'R', 1, 'R');
+        $valorDocumento = ($mostrarAtualizado && $this->boleto[$i]->getDiasAtraso() > 0) ? Util::nReal($this->boleto[$i]->getValorCobrado()) : Util::nReal($this->boleto[$i]->getValor());
+        $this->Cell(50, $this->cell, $this->_($valorDocumento), 'R', 1, 'R');
 
         $yStartPix = $this->GetY();
         $this->SetFont($this->PadraoFont, '', $this->fdes);

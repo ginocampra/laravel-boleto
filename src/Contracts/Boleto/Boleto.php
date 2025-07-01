@@ -377,6 +377,11 @@ interface Boleto
     public function getMostrarRecalculado();
 
     /**
+     * @return mixed
+     */
+    public function getMostrarAtualizado();
+
+    /**
      * @return bool
      */
     public function imprimeBoleto();

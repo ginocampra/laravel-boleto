@@ -80,6 +80,13 @@ class Abc extends AbstractBoleto implements BoletoContract
     protected $mostrarRecalculado = false;
 
     /**
+     * Mostrar Boleto atualizado
+     *
+     * @var bool
+     */
+    protected $mostrarAtualizado = false;
+
+    /**
      * @return int
      */
     public function getRange()
@@ -242,5 +249,28 @@ class Abc extends AbstractBoleto implements BoletoContract
     public function getMostrarRecalculado()
     {
         return $this->mostrarRecalculado;
+    }
+
+    /**
+     * Define se deve mostrar informações de boleto atualizado
+     *
+     * @param bool $mostrarAtualizado
+     * @return Abc
+     */
+    public function setMostrarAtualizado($mostrarAtualizado = true)
+    {
+        $this->mostrarAtualizado = (bool) $mostrarAtualizado;
+
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de boleto atualizado
+     *
+     * @return bool
+     */
+    public function getMostrarAtualizado()
+    {
+        return $this->mostrarAtualizado;
     }
 }

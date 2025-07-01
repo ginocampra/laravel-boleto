@@ -2191,6 +2191,14 @@ abstract class AbstractBoleto implements BoletoContract
     }
 
     /**
+     * @return bool
+     */
+    public function mostrarAtualizado($default = false)
+    {
+        return $this->getMostrarAtualizado();
+    }
+
+    /**
      * @param $id
      * @return string
      */

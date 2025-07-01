@@ -58,6 +58,13 @@ class Inter extends AbstractBoleto implements BoletoAPIContract
     protected $mostrarRecalculado = false;
 
     /**
+     * Mostrar informações de atualização no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarAtualizado = false;
+
+    /**
      * @var string[]
      */
     protected $protectedFields = [
@@ -433,5 +440,27 @@ class Inter extends AbstractBoleto implements BoletoAPIContract
     public function getMostrarRecalculado()
     {
         return $this->mostrarRecalculado;
+    }
+
+    /**
+     * Define se deve mostrar informações de atualização no boleto
+     *
+     * @param bool $mostrarAtualizado
+     * @return $this
+     */
+    public function setMostrarAtualizado($mostrarAtualizado = true)
+    {
+        $this->mostrarAtualizado = (bool) $mostrarAtualizado;
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de atualização no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarAtualizado()
+    {
+        return $this->mostrarAtualizado;
     }
 }

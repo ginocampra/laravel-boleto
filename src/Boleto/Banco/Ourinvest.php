@@ -53,6 +53,13 @@ class Ourinvest extends AbstractBoleto implements BoletoContract
     protected $mostrarRecalculado = false;
 
     /**
+     * Mostrar informações de atualização no boleto
+     *
+     * @var bool
+     */
+    protected $mostrarAtualizado = false;
+
+    /**
      * @return bool
      */
     public function isEmissaoPropria()
@@ -171,5 +178,27 @@ class Ourinvest extends AbstractBoleto implements BoletoContract
     public function getMostrarRecalculado()
     {
         return $this->mostrarRecalculado;
+    }
+
+    /**
+     * Define se deve mostrar informações de atualização no boleto
+     *
+     * @param bool $mostrarAtualizado
+     * @return $this
+     */
+    public function setMostrarAtualizado($mostrarAtualizado = true)
+    {
+        $this->mostrarAtualizado = (bool) $mostrarAtualizado;
+        return $this;
+    }
+
+    /**
+     * Retorna se deve mostrar informações de atualização no boleto
+     *
+     * @return bool
+     */
+    public function getMostrarAtualizado()
+    {
+        return $this->mostrarAtualizado;
     }
 }
