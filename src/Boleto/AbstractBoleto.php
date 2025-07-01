@@ -1455,7 +1455,7 @@ abstract class AbstractBoleto implements BoletoContract
             return (float) $default;
         }
 
-        return (float) ($this->getValor() + $this->getValorMulta());
+        return (float) ($this->getValor() + $this->getValorMulta() + $this->getValorMora());
     }    
 
     /**
