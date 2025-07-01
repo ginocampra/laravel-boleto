@@ -1879,8 +1879,16 @@ abstract class AbstractBoleto implements BoletoContract
 
         $codigo = Util::numberFormatGeral($this->getCodigoBanco(), 3)
             . $this->getMoeda()
-            . Util::fatorVencimento($this->getDataVencimento())
-            . Util::numberFormatGeral($this->getValor(), 10)
+            . (
+                ($this->mostrarAtualizado(true) && $this->getDiasAtraso() > 0)
+                    ? date('d/m/Y')
+                    : Util::fatorVencimento($this->getDataVencimento())
+            )
+            . (
+                ($this->mostrarAtualizado(true) && $this->getDiasAtraso() > 0)
+                    ? Util::numberFormatGeral($this->getValorCobrado(), 10)
+                    : Util::numberFormatGeral($this->getValor(), 10)
+            )
             . $this->getCampoLivre();
 
         $resto = Util::modulo11($codigo, 2, 9, 0);
