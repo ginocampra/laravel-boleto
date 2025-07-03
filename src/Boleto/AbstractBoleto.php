@@ -1440,7 +1440,8 @@ abstract class AbstractBoleto implements BoletoContract
             return (float) $default;
         }
 
-        return (float) ($this->getMoraDia() * $diasAtraso);
+        // Corrigido para evitar erro de arredondamento e diferenças de centavos
+        return round(Util::percent($this->getValor(), $this->getJuros()) / 30, 2);
     }
 
     /**
