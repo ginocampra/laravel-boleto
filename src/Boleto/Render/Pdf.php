@@ -105,6 +105,11 @@ class Pdf extends AbstractPdf implements PdfContract
             }
             $this->Ln(4);
 
+            $mostrarAtualizado = $this->boleto[$i]->getMostrarAtualizado() ?? false;
+            if ($mostrarAtualizado && ($this->boleto[$i]->getDiasAtraso() > 0)) {
+                $this->SetFont($this->PadraoFont, '', 8);
+                $this->Cell(0, 6, 'Boleto atualizado para pagamento apenas nesta data.', 0, 1, 'R');
+            }
             $this->SetFont($this->PadraoFont, '', $this->fcel);
             $this->Cell(25, $this->cell, $this->_('Linha Digitável: '), 0, 0);
             $this->SetFont($this->PadraoFont, 'B', $this->fcel);
@@ -165,6 +170,11 @@ class Pdf extends AbstractPdf implements PdfContract
         $this->Cell(29, 6, '', 'B');
         $this->SetFont('', 'B', 13);
         $this->Cell(15, 6, $this->boleto[$i]->getCodigoBancoComDv(), 'LBR', 0, 'C');
+        $mostrarAtualizado = $this->boleto[$i]->getMostrarAtualizado() ?? false;
+        if ($mostrarAtualizado && ($this->boleto[$i]->getDiasAtraso() > 0)) {
+            $this->SetFont($this->PadraoFont, '', 8);
+            $this->Cell(0, 6, 'Boleto atualizado para pagamento apenas nesta data.', 0, 1, 'R');
+        }
         $this->SetFont('', 'B', 10);
         $this->Cell(0, 6, $this->boleto[$i]->getLinhaDigitavel(), 'B', 1, 'R');
 
@@ -247,6 +257,12 @@ class Pdf extends AbstractPdf implements PdfContract
         $this->Cell(29, 6, '', 'B');
         $this->SetFont($this->PadraoFont, 'B', 13);
         $this->Cell(15, 6, $this->boleto[$i]->getCodigoBancoComDv(), 'LBR', 0, 'C');
+        // Mostrar aviso se o boleto estiver em atraso e mostrarAtualizado = true
+        $mostrarAtualizado = $this->boleto[$i]->getMostrarAtualizado() ?? false;
+        if ($mostrarAtualizado && ($this->boleto[$i]->getDiasAtraso() > 0)) {
+            $this->SetFont($this->PadraoFont, '', 8);
+            $this->Cell(0, 6, 'Boleto atualizado para pagamento apenas nesta data.', 0, 1, 'R');
+        }
         $this->SetFont($this->PadraoFont, 'B', 10);
         $this->Cell(0, 6, $this->boleto[$i]->getLinhaDigitavel(), 'B', 1, 'R');
 
